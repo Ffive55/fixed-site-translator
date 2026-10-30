@@ -4,7 +4,7 @@
 
 面向指定网站的中文界面翻译扩展。使用本地词库翻译菜单、按钮、说明与提示，支持按网站独立启用，并通过独立配置持续增加网站。
 
-基于 [MaydayV/github-chinese](https://github.com/MaydayV/github-chinese) 开发，GitHub 词库源自 [maboloshi/github-chinese](https://github.com/maboloshi/github-chinese)。这是独立维护的派生版本，当前版本 **3.2.0**，支持 Chrome、Edge、Firefox。
+基于 [MaydayV/github-chinese](https://github.com/MaydayV/github-chinese) 开发，GitHub 词库源自 [maboloshi/github-chinese](https://github.com/maboloshi/github-chinese)。这是独立维护的派生版本，当前版本 **3.3.0**，支持 Chrome、Edge、Firefox。
 
 [项目仓库](https://github.com/Ffive55/fixed-site-translator) · [问题反馈](https://github.com/Ffive55/fixed-site-translator/issues) · [自动检查](https://github.com/Ffive55/fixed-site-translator/actions)
 
@@ -14,12 +14,14 @@
 | --- | --- | --- |
 | GitHub | GitHub 及上游支持的 Gist、Skills、Education、Status；保留原有界面汉化功能 | 本地词库；可选正文翻译 |
 | Tailscale | 官网主要功能区、工作台常见页面、登录页 | 本地词库，无需翻译 API |
+| Docker 官网 | 首页、主要导航、产品入口及价格页面常见文案 | 本地词库，无需翻译 API |
+| Docker 工作台与 Hub | 账户设置、账单、仓库、镜像搜索与详情、用量等常见界面 | 本地词库，无需翻译 API |
 
-官网、控制台和登录页的域名分别配置。未收录的文字保留原文；代码、输入值、技术标识和业务数据不会因为追求全中文而强制改写。已知范围和实际页面检查记录见 [Tailscale 页面检查记录](docs/Tailscale页面检查记录.md)。
+官网、控制台和登录页的域名分别配置。未收录的文字保留原文；代码、输入值、技术标识和业务数据不会因为追求全中文而强制改写。已知范围和实际页面检查记录见 [Tailscale 页面检查记录](docs/Tailscale页面检查记录.md)和 [Docker 页面检查记录](docs/Docker页面检查记录.md)。
 
 ## 功能
 
-- **网站独立开关**：在“翻译设置”中分别启用 GitHub、Tailscale；修改自动保存。
+- **网站独立开关**：在“翻译设置”中分别启用或禁用 GitHub、Tailscale、Docker 官网及 Docker 工作台与 Hub；修改自动保存。
 - **浏览器翻译协作**：启用站点时避免 Edge/Chrome 重复自动翻译；禁用后刷新对应页面并恢复浏览器自带翻译可用，自动与否沿用浏览器设置。
 - **动态页面**：监听新增内容、文字及提示属性，处理 SPA 路由切换。
 - **可扩展配置**：每个网站独立放在 `sites/<id>/site.json`，新站点自动进入设置页。
@@ -28,7 +30,7 @@
 
 ## 安装
 
-本项目目前提供源码和本地扩展包，**没有以本项目名义发布浏览器商店版本**。上游的商店扩展不包含本项目的新增功能。
+本项目提供源码和扩展包，**没有以本项目名义发布浏览器商店版本**。上游的商店扩展不包含本项目的新增功能。已发布的扩展包可从 [GitHub Releases](https://github.com/Ffive55/fixed-site-translator/releases) 下载；发布版本可能落后于主分支源码。
 
 ### Edge / Chrome
 

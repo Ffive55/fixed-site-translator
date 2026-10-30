@@ -1448,7 +1448,7 @@ const SITE = {
 'use strict';
 
 const protectedSelector = [
-  'script', 'style', 'noscript', 'code', 'pre', 'kbd', 'samp', 'textarea',
+  'script', 'style', 'noscript', 'code', 'pre', 'kbd', 'samp', 'textarea', 'option:not([value])',
   'svg', 'math', '[contenteditable]:not([contenteditable="false"])',
   '[translate="no"]', '.notranslate', '.monaco-editor', '.cm-editor', '.CodeMirror'
 ].join(',');

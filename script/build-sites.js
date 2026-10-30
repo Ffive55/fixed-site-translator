@@ -39,7 +39,7 @@ function buildSites(check = false) {
     if (project.homepage) manifest.homepage_url = project.homepage;
     else delete manifest.homepage_url;
     if (browser === 'firefox') manifest.browser_specific_settings.gecko.id = 'fixed-site-translator@local.invalid';
-    manifest.description = '使用本地词库汉化 GitHub、Tailscale 等已适配网站的界面，支持通过独立网站配置持续扩展。';
+    manifest.description = '使用本地词库汉化已适配的网站界面，支持按网站独立开关与持续扩展。';
     manifest.action.default_title = '固定网站中文翻译';
     manifest.host_permissions = [...new Set(sites.flatMap(site => site.matches))];
     manifest.content_scripts = entries;
