@@ -1,0 +1,95 @@
+{
+  "manifest_version": 3,
+  "name": "固定网站中文翻译",
+  "version": "3.2.0",
+  "description": "使用本地词库汉化 GitHub、Tailscale 等已适配网站的界面，支持通过独立网站配置持续扩展。",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://github.com/*",
+    "https://skills.github.com/*",
+    "https://gist.github.com/*",
+    "https://education.github.com/*",
+    "https://www.githubstatus.com/*",
+    "https://tailscale.com/*",
+    "https://www.tailscale.com/*",
+    "https://login.tailscale.com/*",
+    "https://console.tailscale.com/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "fixed-site-translator@local.invalid",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  },
+  "action": {
+    "default_title": "固定网站中文翻译",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "32": "assets/icons/icon32.png",
+      "48": "assets/icons/icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://skills.github.com/*",
+        "https://gist.github.com/*",
+        "https://education.github.com/*",
+        "https://www.githubstatus.com/*"
+      ],
+      "js": [
+        "sites/catalog.js",
+        "sites/preferences.js",
+        "sites/browser-translation-guard.js",
+        "locals.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://tailscale.com/*",
+        "https://www.tailscale.com/*",
+        "https://login.tailscale.com/*",
+        "https://console.tailscale.com/*"
+      ],
+      "js": [
+        "sites/catalog.js",
+        "sites/preferences.js",
+        "sites/browser-translation-guard.js",
+        "sites/tailscale.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_page": "options/options.html",
+  "homepage_url": "https://github.com/Ffive55/fixed-site-translator"
+}

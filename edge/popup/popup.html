@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>固定网站中文翻译</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="panel">
+    <div id="updateNotice" class="update-notice" hidden>
+      <button id="updateNoticeOpen" class="update-notice-main" type="button">
+        <span class="update-dot" aria-hidden="true"></span>
+        <span id="updateNoticeText">已更新到新版本</span>
+      </button>
+      <button id="updateNoticeClose" class="update-notice-close" type="button" aria-label="忽略本次更新提示">×</button>
+    </div>
+
+    <h1>固定网站中文翻译</h1>
+    <p id="featureDescription" class="feature-description">使用本地词库，准确翻译常用网站界面</p>
+
+    <div class="power-wrap">
+      <input id="enable_extension" class="power-input" type="checkbox" aria-label="翻译总开关">
+      <label for="enable_extension" class="power-button">
+        <span class="power-ring"></span>
+        <span class="power-line"></span>
+      </label>
+    </div>
+
+    <p id="status" class="status" aria-live="polite"></p>
+    <p class="usage-note">切换总开关后，会刷新受影响的网站页面。</p>
+    <p id="supportedSites" class="usage-note"></p>
+    <p class="usage-note">仅已启用的网站会阻止浏览器自动翻译。各网站可在翻译设置中单独开关。</p>
+    <button id="openOptions" class="options-btn" type="button">翻译设置</button>
+  </main>
+  <script src="../sites/catalog.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

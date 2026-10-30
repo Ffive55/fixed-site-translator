@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>翻译设置 · 固定网站中文翻译</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">固定网站中文翻译</p>
+      <h1>翻译设置</h1>
+      <p>选择由插件翻译的网站，管理 GitHub 内容翻译和翻译接口。</p>
+    </header>
+
+    <section class="card website-card" aria-labelledby="websiteSettingsTitle">
+      <div class="card-head"><h2 id="websiteSettingsTitle">网站启用</h2><span class="feature-badge">自动保存</span></div>
+      <p id="websiteSummary" class="section-desc">正在读取网站设置…</p>
+      <div id="websiteList" class="website-list"></div>
+      <p class="hint">切换后会自动刷新该网站已打开的页面。关闭后浏览器自带翻译恢复可用，是否自动翻译沿用浏览器原有设置。</p>
+      <p id="websiteStatus" class="website-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <div class="github-settings-intro">
+      <h2>GitHub 内容翻译</h2>
+      <p>以下功能仅用于 GitHub 的 README、About、Issue、Pull Request 和 Release 等内容。先保存翻译接口配置，再开启需要的功能。</p>
+    </div>
+
+    <form id="settingsForm" class="form">
+      <section class="card tabs-card">
+        <div class="tabs" role="tablist" aria-label="内容翻译设置标签页">
+          <button type="button" class="tab-btn is-active" data-tab-target="features" role="tab" aria-selected="true">功能开关</button>
+          <button type="button" class="tab-btn" data-tab-target="api" role="tab" aria-selected="false">翻译接口</button>
+          <button type="button" class="tab-btn" data-tab-target="records" role="tab" aria-selected="false">翻译记录</button>
+        </div>
+      </section>
+
+      <section class="tab-panel is-active" data-tab-panel="features">
+        <section class="card">
+          <div class="card-head">
+            <h2>页面基础汉化</h2>
+          </div>
+          <p class="section-desc">对 GitHub 网页中的技术说明、文档、议题及讨论正文进行就地中文汉化，严格保留代码块与排版结构。</p>
+          <div class="feature-list">
+            <label for="enable_readme_translation" class="feature-item switch-row">
+              <div class="feature-info">
+                <div class="feature-title-row">
+                  <strong>启用 README / About 翻译</strong>
+                  <span class="feature-badge">说明文档</span>
+                  <button type="button" class="feature-tip-trigger" aria-label="查看说明">
+                    <svg class="tip-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zM7.25 4.75a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5zm.75 6.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                    <span class="tip-popover" role="tooltip">翻译仓库 README 内容区域和侧栏 About 描述，不影响代码块、链接、图片路径与 Markdown 结构。</span>
+                  </button>
+                </div>
+              </div>
+              <span class="ios-switch-wrap">
+                <input id="enable_readme_translation" type="checkbox" class="ios-switch-input">
+                <span class="ios-switch" aria-hidden="true"></span>
+              </span>
+            </label>
+
+            <label for="enable_issue_pr_translation" class="feature-item switch-row">
+              <div class="feature-info">
+                <div class="feature-title-row">
+                  <strong>启用正文翻译</strong>
+                  <span class="feature-badge">Issue / Pull Request / Release</span>
+                  <button type="button" class="feature-tip-trigger" aria-label="查看说明">
+                    <svg class="tip-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zM7.25 4.75a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5zm.75 6.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                    <span class="tip-popover" role="tooltip">在 Issue、Pull Request 各楼层评论和 Release 页面为正文增加“翻译”按钮，点击后仅按需翻译当前内容。</span>
+                  </button>
+                </div>
+              </div>
+              <span class="ios-switch-wrap">
+                <input id="enable_issue_pr_translation" type="checkbox" class="ios-switch-input">
+                <span class="ios-switch" aria-hidden="true"></span>
+              </span>
+            </label>
+          </div>
+          <p class="hint">README 与 About 描述共用此开关和翻译接口。默认手动或按需触发，不会强行自动破坏整页英文原始排版。</p>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2>AI 智能增强</h2>
+          </div>
+          <p class="section-desc">依托云端大语言模型（DeepSeek、OpenAI、Qwen 等）的深度理解、提炼与重写能力，提供高阶开源交互辅助。</p>
+          <div class="feature-list">
+            <label for="enable_repo_tldr" class="feature-item switch-row">
+              <div class="feature-info">
+                <div class="feature-title-row">
+                  <strong>启用仓库首页 AI 速读胶囊 (TL;DR)</strong>
+                  <span class="feature-badge">仓库首页</span>
+                  <button type="button" class="feature-tip-trigger" aria-label="查看说明">
+                    <svg class="tip-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zM7.25 4.75a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5zm.75 6.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                    <span class="tip-popover" role="tooltip">在开源项目 README 顶部生成结构化速读胶囊（核心定位与选型考量），秒懂项目价值，支持本地缓存秒开。</span>
+                  </button>
+                </div>
+              </div>
+              <span class="ios-switch-wrap">
+                <input id="enable_repo_tldr" type="checkbox" class="ios-switch-input">
+                <span class="ios-switch" aria-hidden="true"></span>
+              </span>
+            </label>
+
+            <label for="enable_collaboration_helper" class="feature-item switch-row">
+              <div class="feature-info">
+                <div class="feature-title-row">
+                  <strong>启用协作润色助手</strong>
+                  <span class="feature-badge feature-badge--purple">输入框工具栏</span>
+                  <span class="feature-badge">中文转英文</span>
+                  <button type="button" class="feature-tip-trigger" aria-label="查看说明">
+                    <svg class="tip-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zM7.25 4.75a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5zm.75 6.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                    <span class="tip-popover" role="tooltip">在 Issue、Pull Request、讨论及评论输入框增加“润色转为英文”按钮，将中文草稿润色为规范开源英文（支持 Bug 反馈、功能建议、讨论回复、通用润色 4 大模式，带撤销栈保护）。</span>
+                  </button>
+                </div>
+              </div>
+              <span class="ios-switch-wrap">
+                <input id="enable_collaboration_helper" type="checkbox" class="ios-switch-input">
+                <span class="ios-switch" aria-hidden="true"></span>
+              </span>
+            </label>
+          </div>
+          <p class="hint">复用“翻译接口”中的服务配置。建议选择 DeepSeek 等推理速度快的模型，获得秒级响应体验。</p>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2>性能与高级设置</h2>
+          </div>
+          <p class="section-desc">优化请求效率、消除重复开销与 Token 消耗监控。开启“页面基础汉化”后可按需启用高级加速与调试配置。</p>
+          <div class="feature-list">
+            <label for="readme_enable_repo_cache" class="feature-item switch-row">
+              <div class="feature-info">
+                <div class="feature-title-row">
+                  <strong>仓库翻译缓存</strong>
+                  <span class="feature-badge feature-badge--green">秒开免消耗</span>
+                  <button type="button" class="feature-tip-trigger" aria-label="查看说明">
+                    <svg class="tip-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zM7.25 4.75a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5zm.75 6.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                    <span class="tip-popover" role="tooltip">仓库 README 与速读胶囊未变化时，直接使用上次翻译结果，减少重复 API 请求并实现零等待秒开。</span>
+                  </button>
+                </div>
+              </div>
+              <span class="ios-switch-wrap">
+                <input id="readme_enable_repo_cache" type="checkbox" class="ios-switch-input">
+                <span class="ios-switch" aria-hidden="true"></span>
+              </span>
+            </label>
+
+            <label for="readme_enable_progressive" class="feature-item switch-row">
+              <div class="feature-info">
+                <div class="feature-title-row">
+                  <strong>分段渐进翻译</strong>
+                  <span class="feature-badge">长文档加速</span>
+                  <button type="button" class="feature-tip-trigger" aria-label="查看说明">
+                    <svg class="tip-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zM7.25 4.75a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5zm.75 6.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                    <span class="tip-popover" role="tooltip">长 README 按段落分批翻译并逐步显示，显著降低长时间等待体感。</span>
+                  </button>
+                </div>
+              </div>
+              <span class="ios-switch-wrap">
+                <input id="readme_enable_progressive" type="checkbox" class="ios-switch-input">
+                <span class="ios-switch" aria-hidden="true"></span>
+              </span>
+            </label>
+
+            <label for="readme_enable_token_record" class="feature-item switch-row">
+              <div class="feature-info">
+                <div class="feature-title-row">
+                  <strong>记录翻译消耗</strong>
+                  <span class="feature-badge">用量统计</span>
+                  <button type="button" class="feature-tip-trigger" aria-label="查看说明">
+                    <svg class="tip-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zM7.25 4.75a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5zm.75 6.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                    <span class="tip-popover" role="tooltip">记录每次翻译状态、Tokens、耗时和仓库名，用于评估调用成本（可在“翻译记录”面板查看）。</span>
+                  </button>
+                </div>
+              </div>
+              <span class="ios-switch-wrap">
+                <input id="readme_enable_token_record" type="checkbox" class="ios-switch-input">
+                <span class="ios-switch" aria-hidden="true"></span>
+              </span>
+            </label>
+
+            <label for="readme_enable_debug" class="feature-item switch-row">
+              <div class="feature-info">
+                <div class="feature-title-row">
+                  <strong>翻译调试日志</strong>
+                  <span class="feature-badge feature-badge--gray">诊断排查</span>
+                  <button type="button" class="feature-tip-trigger" aria-label="查看说明">
+                    <svg class="tip-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+                      <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zM7.25 4.75a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-1.5 0v-3.5zm.75 6.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                    </svg>
+                    <span class="tip-popover" role="tooltip">记录批次并发、重试、未完成节点和动态重渲染信息，仅用于排查“部分完成”。默认关闭。</span>
+                  </button>
+                </div>
+              </div>
+              <span class="ios-switch-wrap">
+                <input id="readme_enable_debug" type="checkbox" class="ios-switch-input">
+                <span class="ios-switch" aria-hidden="true"></span>
+              </span>
+            </label>
+          </div>
+        </section>
+
+        <section class="card assist">
+          <h2>使用说明</h2>
+          <ul class="guide-list">
+            <li>步骤 1：切到“翻译接口”，填写服务地址、API Key 和模型并保存。</li>
+            <li>步骤 2：点击“测试连通性”确认接口可用。</li>
+            <li>步骤 3：回到“功能开关”，开启需要的翻译功能，再按需开启高级功能。</li>
+            <li>步骤 4：在“翻译记录”查看 Tokens 消耗、缓存命中与翻译状态。</li>
+          </ul>
+        </section>
+
+        <div class="panel-actions">
+          <button type="submit" class="btn btn-primary">保存设置</button>
+          <button type="button" class="btn btn-ghost" data-reset-readme-defaults>恢复默认值</button>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-tab-panel="api">
+        <section class="card">
+          <div class="field">
+            <label for="readme_provider">翻译服务</label>
+            <select id="readme_provider">
+              <option value="deepseek">DeepSeek（推荐）</option>
+              <option value="deepl">DeepL</option>
+              <option value="google">Google Cloud Translation</option>
+              <option value="azure">Microsoft Translator (Azure)</option>
+              <option value="qwen_mt">Qwen-MT（机器翻译）</option>
+              <option value="openai">OpenAI 官方接口</option>
+              <option value="qwen">Qwen 对话模型</option>
+              <option value="minimax">MiniMax</option>
+              <option value="kimi">Kimi</option>
+              <option value="zhipu">智谱 GLM</option>
+              <option value="volcengine">火山方舟</option>
+              <option value="openai_compatible">自定义 OpenAI 兼容接口</option>
+            </select>
+            <p class="hint">推荐使用 DeepSeek：速度快、配置简单，适合 README 和正文翻译。翻译目标语言固定为简体中文（zh-CN）；该配置同时用于 README、About、Issue、Pull Request 和 Release 正文翻译。</p>
+          </div>
+        </section>
+
+        <section class="card provider" data-provider="deepl">
+          <div class="card-head">
+            <h2>DeepL 配置</h2>
+          </div>
+          <div class="field">
+            <label for="readme_deepl_api_url">API 地址</label>
+            <input id="readme_deepl_api_url" type="url" placeholder="https://api-free.deepl.com/v2/translate">
+            <p class="hint">DeepL Free 默认地址：`api-free.deepl.com`，Pro 账号可改为 `api.deepl.com`。</p>
+          </div>
+          <div class="field">
+            <label for="readme_deepl_api_key">API Key</label>
+            <input id="readme_deepl_api_key" type="password" placeholder="DeepL API Key">
+            <p class="hint">在 DeepL 控制台生成，通常以 `:fx` 结尾（Free 套餐）。</p>
+          </div>
+        </section>
+
+        <section class="card provider" data-provider="google">
+          <div class="card-head">
+            <h2>Google Cloud Translation 配置</h2>
+          </div>
+          <div class="field">
+            <label for="readme_google_api_url">API 地址</label>
+            <input id="readme_google_api_url" type="url" placeholder="https://translation.googleapis.com/language/translate/v2">
+            <p class="hint">推荐使用 v2 端点。若走代理网关，可替换为你的网关地址。</p>
+          </div>
+          <div class="field">
+            <label for="readme_google_api_key">API Key</label>
+            <input id="readme_google_api_key" type="password" placeholder="Google API Key">
+            <p class="hint">请确保该 Key 已启用 Cloud Translation API 权限。</p>
+          </div>
+        </section>
+
+        <section class="card provider" data-provider="azure">
+          <div class="card-head">
+            <h2>Microsoft Translator 配置</h2>
+          </div>
+          <div class="field">
+            <label for="readme_azure_api_url">API 地址</label>
+            <input id="readme_azure_api_url" type="url" placeholder="https://api.cognitive.microsofttranslator.com/translate">
+            <p class="hint">默认是全球端点；若使用私有区域端点，请填你的专属地址。</p>
+          </div>
+          <div class="field">
+            <label for="readme_azure_api_key">API Key</label>
+            <input id="readme_azure_api_key" type="password" placeholder="Azure Translator Key">
+            <p class="hint">来自 Azure AI Translator 资源密钥。</p>
+          </div>
+          <div class="field">
+            <label for="readme_azure_region">Region</label>
+            <input id="readme_azure_region" type="text" placeholder="例如：eastasia">
+            <p class="hint">单服务 Global 资源可留空；多服务资源请填写，如 `eastasia`、`koreacentral`。</p>
+          </div>
+        </section>
+
+        <section class="card provider" data-provider="qwen_mt">
+          <div class="card-head">
+            <h2>Qwen-MT 配置</h2>
+          </div>
+          <div class="field">
+            <label for="readme_qwen_mt_api_url">API 地址</label>
+            <input id="readme_qwen_mt_api_url" type="url" placeholder="https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions">
+            <p class="hint">Qwen-MT 是专用机器翻译模型，默认使用 OpenAI 兼容 Chat Completions 地址，并通过 `translation_options` 指定翻译目标。</p>
+          </div>
+          <div class="field">
+            <label for="readme_qwen_mt_api_key">API Key</label>
+            <input id="readme_qwen_mt_api_key" type="password" placeholder="DashScope API Key">
+            <p class="hint">来自阿里云百炼 / Qwen Cloud 的 API Key。</p>
+          </div>
+          <div class="field">
+            <label for="readme_qwen_mt_model">模型</label>
+            <input id="readme_qwen_mt_model" type="text" placeholder="qwen-mt-turbo">
+            <p class="hint">默认使用 `qwen-mt-turbo`，可按平台实际可用模型和额度调整。</p>
+          </div>
+        </section>
+
+        <section class="card provider" data-provider="ai_chat">
+          <div class="card-head">
+            <h2>AI 对话接口配置</h2>
+          </div>
+          <div class="field">
+            <label for="readme_openai_api_url">API 地址</label>
+            <input id="readme_openai_api_url" type="url" placeholder="https://api.openai.com/v1/chat/completions">
+            <p class="hint">选择上方厂商后会自动预填官方 base URL 与模型。自定义 OpenAI 兼容接口也可填完整 `/chat/completions` 地址。为通过商店审核并降低权限风险，默认仅支持 HTTPS（本地 localhost 可用 HTTP）。</p>
+          </div>
+          <div class="field">
+            <label for="readme_openai_api_key">API Key</label>
+            <input id="readme_openai_api_key" type="password" placeholder="Bearer Key">
+            <p class="hint">支持 Bearer Token 鉴权的 OpenAI Chat Completions 兼容接口。</p>
+          </div>
+          <div class="field">
+            <label for="readme_openai_model">模型</label>
+            <input id="readme_openai_model" type="text" placeholder="deepseek-flash / gpt-4.1-mini / qwen-flash">
+            <p class="hint">填接口实际可用的模型名，大小写请与平台要求一致。</p>
+          </div>
+          <p class="hint">对话模型翻译提示词已内置，会自动保留 Markdown 结构、链接、代码块、图片与表格格式；DeepSeek 默认关闭思考模式，以优先保证翻译速度。</p>
+        </section>
+
+        <section class="card connection-test">
+          <button id="testConnection" type="button" class="btn btn-test btn-inline">测试连通性</button>
+          <p id="testStatus" class="status status-context" aria-live="polite"></p>
+          <p class="hint">点击后会用当前表单配置发送一次最小测试请求，不会修改页面内容。首次测试某个 API 域名时，浏览器会弹出域名访问授权提示。若返回 401/403/429，请先检查 API Key 权限、额度和模型名。</p>
+        </section>
+
+        <div class="panel-actions">
+          <button type="submit" class="btn btn-primary">保存设置</button>
+          <button type="button" class="btn btn-ghost" data-reset-readme-defaults>恢复默认值</button>
+        </div>
+      </section>
+
+      <section class="tab-panel" data-tab-panel="records">
+        <section class="card history">
+          <div class="history-head">
+            <h2>翻译记录</h2>
+            <div class="history-tools">
+              <button id="refreshRecords" type="button" class="btn btn-ghost btn-mini">刷新记录</button>
+              <button id="clearRecords" type="button" class="btn btn-ghost btn-mini">清空记录</button>
+              <button id="clearRepoCache" type="button" class="btn btn-ghost btn-mini">清空仓库缓存</button>
+              <button id="exportDebugLogs" type="button" class="btn btn-ghost btn-mini">导出调试日志</button>
+              <button id="clearDebugLogs" type="button" class="btn btn-ghost btn-mini">清空调试日志</button>
+            </div>
+          </div>
+          <p id="recordsSummary" class="hint">暂无翻译记录。</p>
+          <ul id="recordsList" class="history-list"></ul>
+          <div id="recordsPager" class="history-pager" hidden>
+            <button id="recordsPrev" type="button" class="btn btn-ghost btn-mini">上一页</button>
+            <span id="recordsPageInfo" class="history-page-info"></span>
+            <button id="recordsNext" type="button" class="btn btn-ghost btn-mini">下一页</button>
+          </div>
+        </section>
+      </section>
+
+      <p id="status" class="status status-page" aria-live="polite"></p>
+
+      <section class="footer-meta">
+        <p><strong>扩展上游项目（致谢）：</strong><a href="https://github.com/MaydayV/github-chinese" target="_blank" rel="noopener noreferrer">https://github.com/MaydayV/github-chinese</a></p>
+        <p><strong>Github 翻译原仓库（致谢）：</strong><a href="https://github.com/maboloshi/github-chinese" target="_blank" rel="noopener noreferrer">https://github.com/maboloshi/github-chinese</a></p>
+      </section>
+    </form>
+  </main>
+
+  <script src="../sites/catalog.js"></script>
+  <script src="../sites/preferences.js"></script>
+  <script src="website-settings.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
