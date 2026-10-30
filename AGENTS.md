@@ -34,6 +34,15 @@
 
 ## 验证与交付
 
+## 二次发布与来源追溯
+
+- 二次发布必须遵循原项目的 GPL-3.0 许可要求，保留原文件中注明“第 3 版或更新版本”的许可头及版权归属。
+- 源码和扩展发布包必须包含 LICENSE 与 THIRD_PARTY_NOTICES.md，不得去掉上游作者、项目链接或来源说明。
+- README 保留 MaydayV/github-chinese 与 maboloshi/github-chinese 的致谢；GitHub 词库的原始提交、同步基线和后续提交记录继续保留，便于社区协作与追溯。
+- 本项目明确标注为独立派生版本，不冒用原作者商店版本或官方项目身份。
+
+## 验证与交付命令
+
 ```powershell
 npm run build
 npm test
